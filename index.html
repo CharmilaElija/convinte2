@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graduação | Iracema Elija</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --navy: #050b1c;
+    --navy-light: #101d38;
+    --gold: #e4c16b;
+    --gold-light: #fff0b5;
+    --white: #fff;
+}
+body {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+.screen.active {
+    display: flex;
+    animation: appear 1s ease;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+h1 {
+    font-size: clamp(2.2rem, 8vw, 3.7rem);
+    margin: 20px 0;
+    color: var(--gold-light);
+    text-shadow: 0 0 20px rgba(228,193,107,.35);
+}
+h2 {
+    margin: 15px 0;
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+}
+p {
+    line-height: 1.8;
+    margin: 10px 0;
+    max-width: 520px;
+}
+.gold-line {
+    width: 170px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--gold),
+        transparent
+    );
+    margin: 16px auto;
+}
+.cap {
+    font-size: 85px;
+    animation: float 3s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(228,193,107,.3));
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(3deg);
+    }
+}
+button,
+.location-link {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold-light), #b8892d);
+    color: #071126;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 25px;
+    margin: 12px 5px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .3s;
+}
+button:hover,
+.location-link:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 20px rgba(228,193,107,.4);
+}
+.card {
+    border: 1px solid #b8892d;
+    padding: 25px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 18px;
+    background: rgba(15,27,55,.88);
+    box-shadow: 0 0 30px rgba(184,137,45,.12);
+}
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid #c6a34b;
+    background: #08142c;
+    color: white;
+    font-size: 16px;
+}
+label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+}
+.small {
+    font-size: 12px;
+    opacity: .8;
+}
+.radio-option {
+    text-align: left;
+    margin: 12px 0;
+}
+.radio-option input {
+    display: inline-block;
+    width: auto;
+    margin-right: 8px;
+}
+.music-box {
+    border: 1px solid #b8892d;
+    padding: 18px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    margin: 22px auto;
+    background: rgba(15,27,55,.65);
+}
+audio {
+    width: 100%;
+    margin-top: 12px;
+}
+footer {
+    font-size: 11px;
+    color: #c4a75c;
+    margin-top: 30px;
+}
+.stars {
+    position: absolute;
+    color: var(--gold-light);
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 0;
+}
+.screen > *:not(.stars) {
+    position: relative;
+    z-index: 1;
+}
+@keyframes fall {
+    from {
+        transform: translateY(-10vh) rotate(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+@media (max-width: 480px) {
+    .screen {
+        padding: 25px 15px;
+    }
+    .card {
+        padding: 20px 15px;
+    }
+    .cap {
+        font-size: 70px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- MÚSICA DO CONVITE -->
+<audio id="backgroundMusic" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    O teu navegador não suporta áudio.
+</audio>
+<!-- TELA 1: CAPA -->
+<section class="screen active" id="screen1">
+    <div class="cap">🎓</div>
+    <p>UM MOMENTO ESPECIAL</p>
+    <div class="gold-line"></div>
+    <p>CELEBRAÇÃO DE GRADUAÇÃO</p>
+    <h1>Iracema Elija</h1>
+    <h2>Construção Civil</h2>
+    <div class="gold-line"></div>
+    <p>
+        Uma conquista construída com dedicação,
+        esforço e determinação merece ser celebrada.
+    </p>
+    <p>
+        Com muita alegria, convido-te a fazer
+        parte deste momento inesquecível.
+    </p>
+    <button onclick="openInvitation()">
+        ✨ Abrir convite
+    </button>
+    <footer>
+        UMA CONQUISTA, UM NOVO COMEÇO
+    </footer>
+</section>
+<!-- TELA 2: INFORMAÇÕES DA GRADUAÇÃO -->
+<section class="screen" id="screen2">
+    <div class="cap">🎓</div>
+    <p>COM MUITA ALEGRIA</p>
+    <h1>Estás convidado!</h1>
+    <div class="gold-line"></div>
+    <div class="card">
+        <p>
+            É com enorme satisfação que te convido
+            para celebrar comigo esta importante
+            etapa da minha vida académica.
+        </p>
+        <h2>Iracema Elija</h2>
+        <div class="gold-line"></div>
+        <p>🎓 <strong>Curso</strong></p>
+        <p>Construção Civil</p>
+        <p>📅 <strong>Data</strong></p>
+        <p>20 de Novembro de 2026</p>
+        <p>🕒 <strong>Horário</strong></p>
+        <p>15h00</p>
+        <p>📍 <strong>Local</strong></p>
+        <p>Prédio Lopes</p>
+        <p>🖤 <strong>Traje</strong></p>
+        <p>Preto — Black Dress Code</p>
+        <a
+            class="location-link"
+            href="https://www.google.com/maps/search/?api=1&query=Pr%C3%A9dio+Lopes"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            📍 Procurar localização
+        </a>
+        <p class="small">
+            Consulta a localização e confirma o endereço
+            exato do local antes de iniciar a viagem.
+        </p>
+    </div>
+    <!-- MÚSICA -->
+    <div class="music-box">
+        <p>🎵 MÚSICA DO CONVITE</p>
+        <div class="gold-line"></div>
+        <p>
+            <strong>
+                Hernâni - Podes (Video Oficial) (2020) - Hernâni da Silva Mudanisse (youtube)
+            </strong>
+        </p>
+        <audio controls preload="metadata">
+            <source src="musica.mp3" type="audio/mpeg">
+            O teu navegador não suporta áudio.
+        </audio>
+        <p class="small">
+            Duração indicada: 3 minutos e 15 segundos.
+        </p>
+        <p class="small">
+            Para reproduzir a música, coloca o ficheiro
+            musica.mp3 na mesma pasta deste ficheiro HTML.
+        </p>
+    </div>
+    <button onclick="showScreen('screen3')">
+        💌 Confirmar presença
+    </button>
+    <button onclick="showScreen('screen1')">
+        ← Voltar à capa
+    </button>
+</section>
+<!-- TELA 3: CONFIRMAÇÃO DE PRESENÇA -->
+<section class="screen" id="screen3">
+    <div class="cap">💌</div>
+    <h1>Confirmação</h1>
+    <div class="gold-line"></div>
+    <div class="card">
+        <p>
+            A tua presença tornará esta conquista
+            ainda mais especial.
+        </p>
+        <form id="rsvpForm">
+            <label for="guestName">
+                Nome completo
+            </label>
+            <input
+                type="text"
+                id="guestName"
+                placeholder="Escreve o teu nome completo"
+                required
+            >
+            <label>
+                Vais participar na celebração?
+            </label>
+            <div class="radio-option">
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="Sim, estarei presente"
+                    required
+                >
+                Sim, estarei presente.
+            </div>
+            <div class="radio-option">
+                <input
+                    type="radio"
+                    name="attendance"
+                    value="Não poderei participar"
+                >
+                Infelizmente, não poderei participar.
+            </div>
+            <button type="submit">
+                Enviar confirmação
+            </button>
+        </form>
+        <p class="small">
+            Esta versão apresenta a confirmação no convite,
+            mas não envia nem guarda os dados num servidor.
+            Para receber as respostas, será necessária
+            uma integração com um serviço de formulários.
+        </p>
+    </div>
+    <button onclick="showScreen('screen2')">
+        ← Voltar ao convite
+    </button>
+</section>
+<!-- TELA FINAL: AGRADECIMENTO -->
+<section class="screen" id="screen4">
+    <div class="cap">✨</div>
+    <p>UMA ETAPA CONCLUÍDA, OUTRA A COMEÇAR</p>
+    <div class="gold-line"></div>
+    <h1>Obrigada!</h1>
+    <p id="thankYouMessage">
+        Obrigada por fazeres parte deste momento especial.
+    </p>
+    <h2>Iracema Elija</h2>
+    <p>Construção Civil</p>
+    <div class="gold-line"></div>
+    <p>
+        Que esta conquista seja apenas o início
+        de uma caminhada repleta de realizações.
+    </p>
+    <p>
+        A tua presença ficará guardada
+        na memória deste dia especial.
+    </p>
+    <button onclick="showScreen('screen1')">
+        Voltar ao início
+    </button>
+</section>
+<script>
+// NAVEGAÇÃO ENTRE AS TELAS
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+// ABRIR CONVITE E TENTAR INICIAR A MÚSICA
+function openInvitation() {
+    showScreen('screen2');
+    const music = document.getElementById('backgroundMusic');
+    music.play().catch(() => {
+        // Se o navegador bloquear a reprodução automática,
+        // o convidado poderá carregar no botão de áudio.
+    });
+}
+// CONFIRMAÇÃO DE PRESENÇA
+document.getElementById('rsvpForm').addEventListener(
+    'submit',
+    function(event) {
+        event.preventDefault();
+        const name = document.getElementById('guestName')
+            .value.trim();
+        const selectedAttendance = document.querySelector(
+            'input[name="attendance"]:checked'
+        );
+        if (!name || !selectedAttendance) {
+            alert('Preenche o teu nome e seleciona uma resposta.');
+            return;
+        }
+        const attendance = selectedAttendance.value;
+        document.getElementById('thankYouMessage').textContent =
+            'Obrigada, ' + name + '! Registaste a seguinte resposta: ' +
+            attendance + '.';
+        showScreen('screen4');
+    }
+);
+// ANIMAÇÃO DE ESTRELAS DOURADAS
+function createStar() {
+    const activeScreen = document.querySelector('.screen.active');
+    if (!activeScreen) return;
+    const star = document.createElement('span');
+    const symbols = ['✦', '✧', '⋆', '✦'];
+    star.className = 'stars';
+    star.textContent = symbols[
+        Math.floor(Math.random() * symbols.length)
+    ];
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = '-20px';
+    star.style.fontSize =
+        (10 + Math.random() * 18) + 'px';
+    star.style.animationDuration =
+        (4 + Math.random() * 6) + 's';
+    activeScreen.appendChild(star);
+    setTimeout(() => {
+        star.remove();
+    }, 10000);
+}
+setInterval(createStar, 350);
+</script>
+</body>
+</html>
